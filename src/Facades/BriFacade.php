@@ -1,13 +1,13 @@
 <?php
 
-namespace Aslam\BRI;
+namespace Aslam\Bri\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class BRIFacade extends Facade
+class BriFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'BRI';
+        return 'BriAPI';
     }
 }
