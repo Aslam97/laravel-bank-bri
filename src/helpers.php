@@ -11,10 +11,12 @@ if (!function_exists('get_hmac_signature')) {
      * @param  mixed $requestBody
      * @return string
      */
-    function get_hmac_signature(string $requestPath, string $httpMethod, string $token, string $requestBody)
+    function get_hmac_signature(string $requestPath, string $httpMethod, string $token, array $requestBody = [])
     {
-        if (strtoupper($httpMethod) === 'GET' || !$requestBody) {
+        if (empty($requestBody)) {
             $requestBody = '';
+        } else {
+            $requestBody = json_encode($requestBody, true);
         }
 
         $requestPath = parse_url($requestPath)['path'];

@@ -4,6 +4,7 @@ namespace Aslam\Bri;
 
 use Aslam\Bri\Exceptions\BriHttpException;
 use Aslam\Bri\Traits;
+use Exception;
 use Illuminate\Support\Facades\Http;
 
 class Bri
@@ -79,20 +80,23 @@ class Bri
      *
      * @throws BriHttpException
      */
-    public function sendRequest(string $httpMethod, string $requestUrl, array $options = [])
+    public function sendRequest(string $httpMethod, string $requestUrl, array $data = [])
     {
         try {
-            return Http::withToken($this->token)
-                ->withHeaders([
-                    'BRI-Timestamp' => get_timestamp(),
-                    'BRI-Signature' => get_hmac_signature($requestUrl, $httpMethod, $this->token, ''),
-                ])
-                ->send($httpMethod, $requestUrl, $options)
-                ->throw()
-                ->json();
 
-        } catch (\Exception $e) {
-            return $e->response->json();
+            $headers = [
+                'BRI-Timestamp' => get_timestamp(),
+                'BRI-Signature' => get_hmac_signature($requestUrl, $httpMethod, $this->token, $data),
+            ];
+
+            $response = Http::withToken($this->token)
+                ->withHeaders($headers)
+                ->{strtolower($httpMethod)}($requestUrl, $data);
+
+            return $response->throw()->json();
+
+        } catch (Exception $exception) {
+            return $exception->response->json();
         }
     }
 
