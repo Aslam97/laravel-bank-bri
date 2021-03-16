@@ -1,0 +1,19 @@
+{
+    "name": "aslam/bank-bri",
+    "description": "Laravel package for BRI API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aslam",
+            "email": "iupin5212@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Aslam\\BRI\\": "src/"
+        }
+    },
+    "require": {}
+}
