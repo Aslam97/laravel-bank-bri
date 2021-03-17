@@ -5,46 +5,91 @@ namespace Aslam\Bri\Traits;
 trait BRIVA
 {
     /**
-     * Endpoint ini digunakan untuk membuat virtual account BRI baru.
+     * Create BRIVA
      *
-     * @param  array $data
+     * @param array
      * @return \Aslam\Bri\Response
      */
     public function createBriva(array $data)
     {
         $requestUrl = $this->apiUrlV1 . $this->endpoint->briva;
+        $data = array_merge($data, ['institutionCode' => $this->institutionCode]);
 
         return $this->sendRequest('POST', $requestUrl, $data);
     }
 
     /**
-     * Endpoint ini digunakan untuk mendapatkan informasi virtual account yang telah dibuat.
+     * Get BRIVA information that has been created.
      *
-     * @param  string $institutionCode
-     * @param  int $brivaNo
-     * @param  string $customerCode
+     * @param string $brivaNo
+     * @param string $customerCode
      * @return \Aslam\Bri\Response
      */
-    public function getBriva(string $institutionCode, int $brivaNo, string $customerCode)
+    public function getBriva(string $brivaNo, string $customerCode)
     {
-        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->briva}/{$institutionCode}/{$brivaNo}/{$customerCode}";
+        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->briva}/{$this->institutionCode}/{$brivaNo}/{$customerCode}";
 
         return $this->sendRequest('GET', $requestUrl);
     }
 
     /**
-     * Semua akun BRIVA memiliki statusBayar atau status pembayaran.
-     * Endpoint ini digunakan untuk mendapatkan status pembayaran dari akun BRIVA yang ada.
+     * Get payment status of an existing BRIVA account.
      *
-     * @param  string $institutionCode
-     * @param  int $brivaNo
-     * @param  string $customerCode
+     * @param string $brivaNo
+     * @param string $customerCode
      * @return \Aslam\Bri\Response
      */
-    public function getStatusBriva(string $institutionCode, int $brivaNo, string $customerCode)
+    public function getStatusBriva(int $brivaNo, string $customerCode)
     {
-        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->briva}/status/{$institutionCode}/{$brivaNo}/{$customerCode}";
+        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->briva_status}/{$this->institutionCode}/{$brivaNo}/{$customerCode}";
 
         return $this->sendRequest('GET', $requestUrl);
+    }
+
+    /**
+     * Manage payment status of an existing BRIVA account
+     *
+     * @param array $data
+     * @param string $statusBayar Y|N
+     * @return \Aslam\Bri\Response
+     */
+    public function updateStatusBriva(array $data)
+    {
+        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->briva_status}";
+        $data = array_merge($data, ['institutionCode' => $this->institutionCode]);
+
+        return $this->sendRequest('PUT', $requestUrl, $data);
+    }
+
+    /**
+     * Update existing BRIVA account.
+     *
+     * @param array $data
+     * @return \Aslam\Bri\Response
+     */
+    public function updateBriva(array $data)
+    {
+        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->briva}";
+        $data = array_merge($data, ['institutionCode' => $this->institutionCode]);
+
+        return $this->sendRequest('PUT', $requestUrl, $data);
+    }
+
+    /**
+     * Delete BRIVA
+     *
+     * @param string $brivaNo
+     * @param string $custCode
+     * @return \Aslam\Bri\Response
+     */
+    public function deleteBriva(string $brivaNo, string $custCode)
+    {
+        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->briva}";
+        $institutionCode = $this->institutionCode;
+
+        $data = compact('institutionCode', 'brivaNo', 'custCode');
+        $query = http_build_query($data);
+
+        return $this->sendRequest('DELETE', $requestUrl, $query);
     }
 }

@@ -51,19 +51,29 @@ $bri = BriAPI::setToken($accessToken);
  * Informational
  */
 
-// Get account number information
+/**
+ * Check your company account information, including account name, balance, and status.
+ */
 $accountInformation = $bri->accountInformation()->toJson();
 
-// Get account number transaction history
-$accountTransactionHistory = $bri->accountTransactionHistory($startDate, $endDate)->toJson();
+/**
+ * Display transaction history of your company account with a maximum period of one month for each request.
+ *
+ * @param string $startDate
+ * @param string $endDate
+ */
+$accountTransactionHistory = $bri->accountTransactionHistory('01-03-2017', '01-04-2017')->toJson();
 
 /**
  * Transactional
  */
 
-// Create BRI Virtual Account
-$brivaCreateVA = $bri->createBriva([
-    'institutionCode' => 'J104408',
+/**
+ * Create BRIVA
+ *
+ * @param array
+ */
+$createBriva = $bri->createBriva([
     'brivaNo' => '77777',
     'custCode' => '123456789115',
     'nama' => 'Sabrina',
@@ -71,6 +81,56 @@ $brivaCreateVA = $bri->createBriva([
     'keterangan' => 'Testing BRIVA',
     'expiredDate' => '2020-02-27 23:59:00',
 ])->toJson();
+
+/**
+ * Get BRIVA information that has been created.
+ *
+ * @param string $briva_no
+ * @param string $customer_code
+ */
+$getBriva = $bri->getBriva('77777', '123456789001')->toJson();
+
+/**
+ * Get payment status of an existing BRIVA account.
+ *
+ * @param string $briva_no
+ * @param string $customer_code
+ */
+$getStatusBriva = $bri->getStatusBriva('77777', '123456789001')->toJson();
+
+/**
+ * Manage payment status of an existing BRIVA account
+ *
+ * @param array
+ * @param string $statusBayar Y|N
+ */
+$updateStatusBriva = $bri->updateStatusBriva([
+    'brivaNo' => '77777',
+    'custCode' => '123456789001',
+    'statusBayar' => 'Y',
+])->toJson();
+
+/**
+ * Update existing BRIVA account.
+ *
+ * @param array
+ */
+$updateBriva = $bri->updateBriva([
+    'brivaNo' => '77777',
+    'custCode' => '123456789115',
+    'nama' => 'Brigita',
+    'amount' => '1000000',
+    'keterangan' => "BRIVA Testing",
+    'expiredDate' => "2020-03-10 23:59:00",
+])->toJson();
+
+/**
+ * Delete BRIVA
+ *
+ * @param string $briva_no
+ * @param string $cust_code
+ */
+$deleteBriva = $bri->deleteBriva('77777', '123456789115')->toJson();
 
 /**
  *  This package also exposes a helper function you can use if you are not a fan of Facades

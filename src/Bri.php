@@ -17,42 +17,49 @@ class Bri
      *
      * @var mixed
      */
-    protected $apiUrlV1;
+    private $apiUrlV1;
 
     /**
      * apiUrlV2
      *
      * @var mixed
      */
-    protected $apiUrlV2;
+    private $apiUrlV2;
 
     /**
      * clientID
      *
      * @var mixed
      */
-    protected $clientID;
+    private $clientID;
 
     /**
      * clientSecret
      *
      * @var mixed
      */
-    protected $clientSecret;
+    private $clientSecret;
 
     /**
      * endpoint
      *
      * @var mixed
      */
-    protected $endpoint;
+    private $endpoint;
 
     /**
      * Token
      *
      * @var mixed
      */
-    protected $token;
+    private $token;
+
+    /**
+     * institutionCode
+     *
+     * @var mixed
+     */
+    private $institutionCode;
 
     /**
      * Initiate bri API config
@@ -68,6 +75,7 @@ class Bri
         $this->endpoint = (object) rtrim_endpoint(config('bank-bri.endpoint'));
 
         $this->token = $token;
+        $this->institutionCode = config('bank-bri.institution_code');
     }
 
     /**
@@ -75,12 +83,12 @@ class Bri
      *
      * @param  string $httpMethod
      * @param  string $requestUrl
-     * @param  array $options
+     * @param  string|array $data
      * @return \Aslam\Bri\Response
      *
      * @throws RequestException
      */
-    public function sendRequest(string $httpMethod, string $requestUrl, array $data = [])
+    public function sendRequest(string $httpMethod, string $requestUrl, $data = '')
     {
         try {
             $options = ['http_errors' => false];
@@ -100,6 +108,10 @@ class Bri
                 if (in_array($method, $methods)) {
                     $options['headers']['Content-Type'] = 'application/json';
                     $options['json'] = $data;
+                }
+
+                if ($method === 'DELETE') {
+                    $options['body'] = $data;
                 }
             }
 
@@ -124,12 +136,25 @@ class Bri
     /**
      * setToken
      *
-     * @param  string $token
-     * @return
+     * @param string $token
+     * @return $this
      */
-    public function setToken($token)
+    public function setToken(string $token)
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * setInstitutionCode
+     *
+     * @param string $institutionCode
+     * @return $this
+     */
+    public function setInstitutionCode(string $institutionCode)
+    {
+        $this->institutionCode = $institutionCode;
 
         return $this;
     }

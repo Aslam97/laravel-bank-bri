@@ -38,17 +38,15 @@ if (!function_exists('get_hmac_signature')) {
     /**
      * Generate signature
      *
-     * @param  mixed $requestPath
-     * @param  mixed $httpMethod
-     * @param  mixed $token
+     * @param  string $requestPath
+     * @param  string $httpMethod
      * @param  mixed $requestBody
+     * @param  string $token
      * @return string
      */
-    function get_hmac_signature(string $requestPath, string $httpMethod, array $requestBody = [], string $token)
+    function get_hmac_signature(string $requestPath, string $httpMethod, $requestBody = '', string $token)
     {
-        if (empty($requestBody)) {
-            $requestBody = '';
-        } else {
+        if (is_array($requestBody) && !empty($requestBody)) {
             $requestBody = json_encode($requestBody, true);
         }
 
