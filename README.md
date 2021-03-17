@@ -68,7 +68,7 @@ The API method returns an instance of Aslam\Bri\Response, which provides a varie
 
 ```php
 method()->body() : string;
-method()->json() : array|mixed;
+method()->toJson() : array|mixed;
 method()->collect() :  // Illuminate\Support\Collection;
 method()->status() : int;
 method()->ok() : bool;
