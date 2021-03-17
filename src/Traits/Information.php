@@ -30,7 +30,14 @@ trait Information
      */
     public function accountTransactionHistory(string $startDate, string $endDate)
     {
-        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->account_transaction_history}/{$startDate}/{$endDate}";
+        $requestUrl = sprintf(
+            '%s%s/%s/%s/%s',
+            $this->apiUrlV1,
+            $this->endpoint->account_transaction_history,
+            config('bank-bri.account_number'),
+            $startDate,
+            $endDate
+        );
 
         return $this->sendRequest('GET', $requestUrl);
     }
