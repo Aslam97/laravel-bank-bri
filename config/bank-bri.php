@@ -3,8 +3,8 @@
 return [
     'api_url_v1' => env('BRI_API_URL_V1', 'https://sandbox.partner.api.bri.co.id'),
     'api_url_v2' => env('BRI_API_URL_V2', 'https://partner.api.bri.co.id/sandbox'),
-    'client_id' => env('BRI_CLIENT_ID', 'AhkqwhpO8GAWGqY1vbZpa3vSWnj1KK9S'),
-    'client_secret' => env('BRI_CLIENT_SECRET', 'vGsfo8oMzbRPf2t4'),
+    'client_id' => env('BRI_CLIENT_ID'),
+    'client_secret' => env('BRI_CLIENT_SECRET'),
 
     //
     'account_number' => env('BRI_ACCOUNT_NUMBER', '888801000157508'),
