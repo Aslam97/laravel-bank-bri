@@ -7,18 +7,14 @@ trait BRIVA
     /**
      * Endpoint ini digunakan untuk membuat virtual account BRI baru.
      *
-     * @param  mixed $data
-     * @return void
+     * @param  array $data
+     * @return \Aslam\Bri\Response
      */
     public function createBriva(array $data)
     {
-        // try {
         $requestUrl = $this->apiUrlV1 . $this->endpoint->briva;
 
         return $this->sendRequest('POST', $requestUrl, $data);
-        // } catch (RequestException $e) {
-        //     return $e->response->toJson();
-        // }
     }
 
     /**
@@ -27,7 +23,7 @@ trait BRIVA
      * @param  string $institutionCode
      * @param  int $brivaNo
      * @param  string $customerCode
-     * @return void
+     * @return \Aslam\Bri\Response
      */
     public function getBriva(string $institutionCode, int $brivaNo, string $customerCode)
     {
@@ -43,7 +39,7 @@ trait BRIVA
      * @param  string $institutionCode
      * @param  int $brivaNo
      * @param  string $customerCode
-     * @return void
+     * @return \Aslam\Bri\Response
      */
     public function getStatusBriva(string $institutionCode, int $brivaNo, string $customerCode)
     {

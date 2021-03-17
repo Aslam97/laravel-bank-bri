@@ -55,7 +55,7 @@ class Bri
     protected $token;
 
     /**
-     * __construct
+     * Initiate bri API config
      *
      * @return void
      */
@@ -78,7 +78,7 @@ class Bri
      * @param  array $options
      * @return \Aslam\Bri\Response
      *
-     * @throws
+     * @throws RequestException
      */
     public function sendRequest(string $httpMethod, string $requestUrl, array $data = [])
     {
@@ -124,7 +124,7 @@ class Bri
      * setToken
      *
      * @param  string $token
-     * @return void
+     * @return
      */
     public function setToken($token)
     {

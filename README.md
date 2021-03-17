@@ -37,11 +37,16 @@ php artisan vendor:publish --provider="Aslam\Bri\Providers\BriServiceProvider"
 use BriAPI;
 
 $accessToken = BriAPI::getToken()['access_token'];
+
+// instead of requesting access_token everytime you make an API call
+// you should put the access token (first time you generate token) in your database
+// later you can check if token exists and not expired. then use token from database
+
 $bri = BriAPI::setToken($accessToken);
 
 // informational
 $accountInformation = $bri->accountInformation()->toJson();
-$accountTransactionHistory = $bri->accountTransactionHistory({start_date}, {end_date})->toJson();
+$accountTransactionHistory = $bri->accountTransactionHistory($startDate, $endDate)->toJson();
 
 /**
  * BRIVA (BRI Virtual Account)
@@ -64,7 +69,7 @@ The API method returns an instance of Aslam\Bri\Response, which provides a varie
 ```php
 method()->body() : string;
 method()->json() : array|mixed;
-method()->collect() : Illuminate\Support\Collection;
+method()->collect() :  // Illuminate\Support\Collection;
 method()->status() : int;
 method()->ok() : bool;
 method()->successful() : bool;

@@ -2,14 +2,15 @@
 
 namespace Aslam\Bri\Traits;
 
+use Exception;
 use Illuminate\Support\Facades\Http;
 
 trait Token
 {
     /**
-     * getToken
+     * Get BRI Token
      *
-     * @return string
+     * @return \Aslam\Bri\Response
      */
     public function getToken()
     {
@@ -25,7 +26,7 @@ trait Token
                 ->throw()
                 ->json();
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $e->response->json();
         }
     }
