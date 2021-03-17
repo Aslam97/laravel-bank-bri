@@ -1,5 +1,20 @@
 <?php
 
+use Aslam\Bri\Bri;
+
+if (!function_exists('briapi')) {
+
+    /**
+     * briapi
+     *
+     * @return Bri
+     */
+    function briapi()
+    {
+        return app(Bri::class);
+    }
+}
+
 if (!function_exists('rtrim_endpoint')) {
 
     /**

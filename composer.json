@@ -1,6 +1,11 @@
 {
   "name": "aslam/bank-bri",
   "description": "Laravel package for BRI API",
+  "keywords": [
+    "laravel-bri",
+    "bri-api",
+    "laravel-bank-bri"
+  ],
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -35,5 +40,9 @@
     "illuminate/collections": "~7.0|~8.0",
     "illuminate/macroable": "~7.0|~8.0",
     "illuminate/support": "~7.0|~8.0"
-  }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "prefer-stable": true
 }

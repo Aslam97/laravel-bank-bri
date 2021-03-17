@@ -47,15 +47,21 @@ $getToken['expires_in'];
 
 $bri = BriAPI::setToken($accessToken);
 
-// informational
+/**
+ * Informational
+ */
+
+// Get account number information
 $accountInformation = $bri->accountInformation()->toJson();
+
+// Get account number transaction history
 $accountTransactionHistory = $bri->accountTransactionHistory($startDate, $endDate)->toJson();
 
 /**
- * BRIVA (BRI Virtual Account)
+ * Transactional
  */
 
-// create VA
+// Create BRI Virtual Account
 $brivaCreateVA = $bri->createBriva([
     'institutionCode' => 'J104408',
     'brivaNo' => '77777',
@@ -65,6 +71,17 @@ $brivaCreateVA = $bri->createBriva([
     'keterangan' => 'Testing BRIVA',
     'expiredDate' => '2020-02-27 23:59:00',
 ])->toJson();
+
+/**
+ *  This package also exposes a helper function you can use if you are not a fan of Facades
+ *  Shorter, expressive, fluent using the
+ *  briapi() function
+ */
+
+$getToken = briapi()->getToken()->toJson();
+$accountInformation = briapi()->setToken($getToken['access_token'])
+    ->accountInformation()
+    ->toJson();
 ```
 
 The API method returns an instance of Aslam\Bri\Response, which provides a variety of methods that may be used to inspect the response:

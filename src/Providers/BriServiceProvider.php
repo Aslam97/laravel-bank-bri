@@ -2,6 +2,7 @@
 
 namespace Aslam\Bri\Providers;
 
+use Aslam\Bri\Bri;
 use Illuminate\Support\ServiceProvider;
 
 class BriServiceProvider extends ServiceProvider
@@ -25,13 +26,10 @@ class BriServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('BriAPI', function () {
-            return new \Aslam\Bri\Bri();
-        });
+        $this->mergeConfigFrom($config = __DIR__ . '/../../config/bank-bri.php', 'bank-bri');
 
-        $this->mergeConfigFrom(
-            __DIR__ . '/../../config/bank-bri.php',
-            'bank-bri'
-        );
+        $this->app->singleton('BriAPI', function () {
+            return new Bri();
+        });
     }
 }
