@@ -2,15 +2,15 @@
 
 namespace Aslam\Bri;
 
-use Aslam\Bri\Exceptions\BriHttpException;
 use Aslam\Bri\Traits;
-use Exception;
-use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ConnectException;
 
 class Bri
 {
     use Traits\Token;
     use Traits\Information;
+    use Traits\BRIVA;
 
     /**
      * apiUrlV1
@@ -76,27 +76,47 @@ class Bri
      * @param  string $httpMethod
      * @param  string $requestUrl
      * @param  array $options
-     * @return \Illuminate\Http\Client\Response
+     * @return \Aslam\Bri\Response
      *
-     * @throws BriHttpException
+     * @throws
      */
     public function sendRequest(string $httpMethod, string $requestUrl, array $data = [])
     {
         try {
 
-            $headers = [
-                'BRI-Timestamp' => get_timestamp(),
-                'BRI-Signature' => get_hmac_signature($requestUrl, $httpMethod, $this->token, $data),
+            $options = [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->token,
+                    'BRI-Timestamp' => get_timestamp(),
+                    'BRI-Signature' => get_hmac_signature($requestUrl, $httpMethod, $this->token, $data),
+                ],
+                'http_errors' => false,
             ];
 
-            $response = Http::withToken($this->token)
-                ->withHeaders($headers)
-                ->{strtolower($httpMethod)}($requestUrl, $data);
+            $method = strtoupper($httpMethod);
 
-            return $response->throw()->json();
+            if ($method === 'POST' || $method === 'PUT' || $method === 'PATCH') {
+                $options['headers']['Content-Type'] = 'application/json';
+                $options['json'] = $data;
+            }
 
-        } catch (Exception $exception) {
-            return $exception->response->json();
+            $client = tap(
+                new Response(
+                    (new Client())->request($httpMethod, $requestUrl, $options)
+                ),
+                function ($response) {
+                    if (!$response->successful()) {
+                        $response->throw();
+                    }
+                }
+            );
+
+            return $client;
+
+        } catch (ConnectException $e) {
+            throw new ConnectionException($e->getMessage(), 0, $e);
+        } catch (RequestException $e) {
+            return $e->response;
         }
     }
 

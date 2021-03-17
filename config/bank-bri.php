@@ -16,6 +16,7 @@ return [
         'account_information' => '/v2/inquiry/' . env('BRI_ACCOUNT_NUMBER', '888801000157508'),
         'account_transaction_history' => '/v1/statement/' . env('BRI_ACCOUNT_NUMBER', '888801000157508'),
 
-        // BRIVA
+        // BRIVA (BRI Virtual Account)
+        'briva' => '/v1/briva',
     ],
 ];
