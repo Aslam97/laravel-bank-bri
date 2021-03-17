@@ -1,1 +1,76 @@
 # Laravel Bank BRI API
+
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/srmklive/paypal.svg?style=flat-square)](https://packagist.org/packages/aslam/bank-bri)
+
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+
+<a name="introduction"></a>
+
+## Introduction
+
+Laravel PHP library to integrate your Application with Bank BRI (Bank Republic Indonesia). For clearer and more complete documentation, please visit the official website [Developer BRI](https://developers.bri.co.id)
+
+<a name="installation"></a>
+
+## Installation
+
+Require this package with composer.
+
+```bash
+composer require aslam/bank-bri
+```
+
+Publish BRI config
+
+```bash
+php artisan vendor:publish --provider="Aslam\Bri\Providers\BriServiceProvider"
+```
+
+<a name="usage"></a>
+
+## Usage
+
+```php
+use BriAPI;
+
+$accessToken = BriAPI::getToken()['access_token'];
+$bri = BriAPI::setToken($accessToken);
+
+// informational
+$accountInformation = $bri->accountInformation()->toJson();
+$accountTransactionHistory = $bri->accountTransactionHistory({start_date}, {end_date})->toJson();
+
+/**
+ * BRIVA (BRI Virtual Account)
+ */
+
+// create VA
+$brivaCreateVA = $bri->createBriva([
+    'institutionCode' => 'J104408',
+    'brivaNo' => '77777',
+    'custCode' => '123456789115',
+    'nama' => 'Sabrina',
+    'amount' => '100000',
+    'keterangan' => 'Testing BRIVA',
+    'expiredDate' => '2020-02-27 23:59:00',
+])->toJson();
+```
+
+The API method returns an instance of Aslam\Bri\Response, which provides a variety of methods that may be used to inspect the response:
+
+```php
+method()->body() : string;
+method()->json() : array|mixed;
+method()->collect() : Illuminate\Support\Collection;
+method()->status() : int;
+method()->ok() : bool;
+method()->successful() : bool;
+method()->failed() : bool;
+method()->serverError() : bool;
+method()->clientError() : bool;
+method()->header($header) : string;
+method()->headers() : array;
+```
