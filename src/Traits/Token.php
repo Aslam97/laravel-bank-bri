@@ -2,9 +2,6 @@
 
 namespace Aslam\Bri\Traits;
 
-use Exception;
-use Illuminate\Support\Facades\Http;
-
 trait Token
 {
     /**
@@ -14,20 +11,16 @@ trait Token
      */
     public function getToken()
     {
-        try {
+        $requestUrl = $this->apiUrlV1 . $this->endpoint->get_token;
 
-            $url = $this->apiUrlV1 . $this->endpoint->get_token;
-
-            return Http::asForm()
-                ->post($url, [
-                    'client_id' => $this->clientID,
-                    'client_secret' => $this->clientSecret,
-                ])
-                ->throw()
-                ->json();
-
-        } catch (Exception $e) {
-            return $e->response->json();
-        }
+        return $this->sendRequest('POST', $requestUrl, [
+            'headers' => [
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            ],
+            'form_params' => [
+                'client_id' => $this->clientID,
+                'client_secret' => $this->clientSecret,
+            ],
+        ]);
     }
 }

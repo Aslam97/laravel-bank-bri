@@ -11,7 +11,12 @@ trait Information
      */
     public function accountInformation()
     {
-        $requestUrl = $this->apiUrlV2 . $this->endpoint->account_information;
+        $requestUrl = sprintf(
+            '%s%s/%s',
+            $this->apiUrlV2,
+            $this->endpoint->account_information,
+            config('bank-bri.account_number')
+        );
 
         return $this->sendRequest('GET', $requestUrl);
     }

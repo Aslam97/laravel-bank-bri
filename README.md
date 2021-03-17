@@ -36,7 +36,10 @@ php artisan vendor:publish --provider="Aslam\Bri\Providers\BriServiceProvider"
 ```php
 use BriAPI;
 
-$accessToken = BriAPI::getToken()['access_token'];
+$getToken = BriAPI::getToken()->toJson();
+
+$getToken['access_token'];
+$getToken['expires_in'];
 
 // instead of requesting access_token everytime you make an API call
 // you should put the access token (first time you generate token) in your database

@@ -13,8 +13,8 @@ return [
         'get_token' => '/oauth/client_credential/accesstoken?grant_type=client_credentials',
 
         // Account Information
-        'account_information' => '/v2/inquiry/' . env('BRI_ACCOUNT_NUMBER', '888801000157508'),
-        'account_transaction_history' => '/v1/statement/' . env('BRI_ACCOUNT_NUMBER', '888801000157508'),
+        'account_information' => '/v2/inquiry',
+        'account_transaction_history' => '/v1/statement',
 
         // BRIVA (BRI Virtual Account)
         'briva' => '/v1/briva',

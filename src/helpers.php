@@ -1,5 +1,23 @@
 <?php
 
+if (!function_exists('rtrim_endpoint')) {
+
+    /**
+     * rtrim_endpoint
+     *
+     * @param  mixed $endpoint
+     * @return void
+     */
+    function rtrim_endpoint($endpoint)
+    {
+        if (is_array($endpoint)) {
+            return array_map('rtrim_endpoint', $endpoint);
+        }
+
+        return rtrim($endpoint, '/');
+    }
+}
+
 if (!function_exists('get_hmac_signature')) {
 
     /**
@@ -11,7 +29,7 @@ if (!function_exists('get_hmac_signature')) {
      * @param  mixed $requestBody
      * @return string
      */
-    function get_hmac_signature(string $requestPath, string $httpMethod, string $token, array $requestBody = [])
+    function get_hmac_signature(string $requestPath, string $httpMethod, array $requestBody = [], string $token)
     {
         if (empty($requestBody)) {
             $requestBody = '';

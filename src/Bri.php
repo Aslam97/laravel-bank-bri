@@ -65,7 +65,7 @@ class Bri
         $this->apiUrlV2 = config('bank-bri.api_url_v2');
         $this->clientID = config('bank-bri.client_id');
         $this->clientSecret = config('bank-bri.client_secret');
-        $this->endpoint = (object) config('bank-bri.endpoint');
+        $this->endpoint = (object) rtrim_endpoint(config('bank-bri.endpoint'));
 
         $this->token = $token;
     }
@@ -83,24 +83,27 @@ class Bri
     public function sendRequest(string $httpMethod, string $requestUrl, array $data = [])
     {
         try {
+            $options = ['http_errors' => false];
 
-            $options = [
-                'headers' => [
+            if (!$this->token) {
+                $options = array_merge($options, $data);
+            } else {
+                $options['headers'] = [
                     'Authorization' => 'Bearer ' . $this->token,
                     'BRI-Timestamp' => get_timestamp(),
-                    'BRI-Signature' => get_hmac_signature($requestUrl, $httpMethod, $this->token, $data),
-                ],
-                'http_errors' => false,
-            ];
+                    'BRI-Signature' => get_hmac_signature($requestUrl, $httpMethod, $data, $this->token),
+                ];
 
-            $method = strtoupper($httpMethod);
+                $method = strtoupper($httpMethod);
+                $methods = ['POST', 'PUT', 'PATCH'];
 
-            if ($method === 'POST' || $method === 'PUT' || $method === 'PATCH') {
-                $options['headers']['Content-Type'] = 'application/json';
-                $options['json'] = $data;
+                if (in_array($method, $methods)) {
+                    $options['headers']['Content-Type'] = 'application/json';
+                    $options['json'] = $data;
+                }
             }
 
-            $client = tap(
+            return tap(
                 new Response(
                     (new Client())->request($httpMethod, $requestUrl, $options)
                 ),
@@ -110,8 +113,6 @@ class Bri
                     }
                 }
             );
-
-            return $client;
 
         } catch (ConnectException $e) {
             throw new ConnectionException($e->getMessage(), 0, $e);
