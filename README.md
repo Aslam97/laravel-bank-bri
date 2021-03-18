@@ -2,6 +2,7 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/aslam/bank-bri.svg?style=flat-square)](https://packagist.org/packages/aslam/bank-bri)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAslam97%2Flaravel-bank-bri.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FAslam97%2Flaravel-bank-bri?ref=badge_shield)
 
 - [Introduction](#introduction)
 - [Installation](#installation)
@@ -159,3 +160,7 @@ method()->clientError() : bool;
 method()->header($header) : string;
 method()->headers() : array;
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAslam97%2Flaravel-bank-bri.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FAslam97%2Flaravel-bank-bri?ref=badge_large)
