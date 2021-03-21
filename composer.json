@@ -1,5 +1,5 @@
 {
-  "name": "aslam/bank-bri",
+  "name": "aslam/laravel-bank-bri",
   "description": "Laravel package for BRI API",
   "keywords": [
     "laravel-bri",
@@ -41,10 +41,10 @@
   "require": {
     "php": ">=7.2|^8.0",
     "ext-json": "*",
-    "guzzlehttp/guzzle": "~7.0",
-    "illuminate/collections": "~7.0|~8.0",
-    "illuminate/macroable": "~7.0|~8.0",
-    "illuminate/support": "~7.0|~8.0"
+    "guzzlehttp/guzzle": "^7.2",
+    "illuminate/collections": "^6.0 || ^7.0 || ^8.0",
+    "illuminate/macroable": "^6.0 || ^7.0 || ^8.0",
+    "illuminate/support": "^6.0 || ^7.0 || ^8.0"
   },
   "config": {
     "sort-packages": true

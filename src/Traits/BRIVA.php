@@ -92,4 +92,23 @@ trait BRIVA
 
         return $this->sendRequest('DELETE', $requestUrl, $query);
     }
+
+    /**
+     * Get transaction history of all BRIVA accounts registered to your BRIVA number.
+     *
+     * @param  string $brivaNo
+     * @param  string $startDate
+     * @param  string $endDate
+     * @return \Aslam\Bri\Response
+     */
+    public function getReportBriva(string $brivaNo, string $startDate, string $endDate)
+    {
+        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->briva_report}/{$this->institutionCode}/{$brivaNo}/{$startDate}/{$endDate}";
+        return $this->sendRequest('GET', $requestUrl);
+    }
+
+    public function getReportTimeBrive()
+    {
+
+    }
 }

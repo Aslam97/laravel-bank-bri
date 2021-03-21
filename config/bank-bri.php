@@ -19,5 +19,6 @@ return [
         // BRIVA (BRI Virtual Account)
         'briva' => '/v1/briva',
         'briva_status' => '/v1/briva/status',
+        'briva_report' => '/v1/briva/report',
     ],
 ];

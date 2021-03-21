@@ -133,6 +133,15 @@ $updateBriva = $bri->updateBriva([
 $deleteBriva = $bri->deleteBriva('77777', '123456789115')->toJson();
 
 /**
+ * Get transaction history of all BRIVA accounts registered to your BRIVA number.
+ *
+ * @param string $brivaNo
+ * @param string $startDate format (yyyyMMdd)
+ * @param string $startDate format (yyyyMMdd)
+ */
+$getReportBriva = $bri->getReportBriva('77777', '20200227', '20200227')->toJson();
+
+/**
  *  This package also exposes a helper function you can use if you are not a fan of Facades
  *  Shorter, expressive, fluent using the
  *  briapi() function
