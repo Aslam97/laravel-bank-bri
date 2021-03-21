@@ -34,6 +34,22 @@ php artisan vendor:publish --provider="Aslam\Bri\Providers\BriServiceProvider"
 
 ## Usage
 
+The API method returns an instance of `\Aslam\Bri\Response`, which provides a variety of methods that may be used to inspect the response:
+
+```php
+method()->body() : string;
+method()->toJson() : array|mixed;
+method()->collect() :  // Illuminate\Support\Collection;
+method()->status() : int;
+method()->ok() : bool;
+method()->successful() : bool;
+method()->failed() : bool;
+method()->serverError() : bool;
+method()->clientError() : bool;
+method()->header($header) : string;
+method()->headers() : array;
+```
+
 ```php
 use BriAPI;
 
@@ -143,6 +159,23 @@ $deleteBriva = $bri->deleteBriva('77777', '123456789115')->toJson();
 $getReportBriva = $bri->getReportBriva('77777', '20200227', '20200227')->toJson();
 
 /**
+ * Get a registered BRIVA account transaction history based on the time of your BRIVA number.
+ *
+ * @param string $brivaNo
+ * @param string $startDate FORMAT (Y-m-d)
+ * @param string $startTime FORMAT (H:i)
+ * @param string $endDate FORMAT (Y-m-d)
+ * @param string $endTime FORMAT (H:i)
+ */
+$getReportTimeBriva = $bri->getReportTimeBriva(
+    '77777',
+    '2019-05-10',
+    '10:30',
+    '2019-05-10',
+    '12:30',
+)->toJson();
+
+/**
  *  This package also exposes a helper function you can use if you are not a fan of Facades
  *  Shorter, expressive, fluent using the
  *  briapi() function
@@ -154,22 +187,6 @@ $accountInformation = briapi()->setToken($getToken['access_token'])
     ->toJson();
 ```
 
-The API method returns an instance of Aslam\Bri\Response, which provides a variety of methods that may be used to inspect the response:
-
-```php
-method()->body() : string;
-method()->toJson() : array|mixed;
-method()->collect() :  // Illuminate\Support\Collection;
-method()->status() : int;
-method()->ok() : bool;
-method()->successful() : bool;
-method()->failed() : bool;
-method()->serverError() : bool;
-method()->clientError() : bool;
-method()->header($header) : string;
-method()->headers() : array;
-```
-
-
 ## License
+
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAslam97%2Flaravel-bank-bri.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FAslam97%2Flaravel-bank-bri?ref=badge_large)

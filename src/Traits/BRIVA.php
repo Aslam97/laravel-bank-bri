@@ -107,8 +107,35 @@ trait BRIVA
         return $this->sendRequest('GET', $requestUrl);
     }
 
-    public function getReportTimeBrive()
-    {
+    /**
+     * getReportTimeBriva
+     *
+     * @param  string $brivaNo
+     * @param  string $startDate FORMAT (Y-m-d)
+     * @param  string $startTime FORMAT (H:i)
+     * @param  string $endDate FORMAT (Y-m-d)
+     * @param  string $endTime FORMAT (H:i)
+     * @return \Aslam\Bri\Response
+     */
+    public function getReportTimeBriva(
+        string $brivaNo,
+        string $startDate,
+        string $startTime,
+        string $endDate,
+        string $endTime
+    ) {
+        $requestUrl = sprintf(
+            '%s%s/%s/%s/%s/%s/%s/%s',
+            $this->apiUrlV1,
+            $this->endpoint->briva_report_time,
+            $this->institutionCode,
+            $brivaNo,
+            $startDate,
+            $startTime,
+            $endDate,
+            $endTime
+        );
 
+        return $this->sendRequest('GET', $requestUrl);
     }
 }

@@ -20,5 +20,6 @@ return [
         'briva' => '/v1/briva',
         'briva_status' => '/v1/briva/status',
         'briva_report' => '/v1/briva/report',
+        'briva_report_time' => '/v1/briva/report_time',
     ],
 ];
