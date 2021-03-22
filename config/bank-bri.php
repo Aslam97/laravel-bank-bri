@@ -3,6 +3,7 @@
 return [
     'api_url_v1' => env('BRI_API_URL_V1', 'https://sandbox.partner.api.bri.co.id'),
     'api_url_v2' => env('BRI_API_URL_V2', 'https://partner.api.bri.co.id/sandbox'),
+
     'client_id' => env('BRI_CLIENT_ID', 'AhkqwhpO8GAWGqY1vbZpa3vSWnj1KK9S'),
     'client_secret' => env('BRI_CLIENT_SECRET', 'vGsfo8oMzbRPf2t4'),
 
@@ -21,5 +22,10 @@ return [
         'briva_status' => '/v1/briva/status',
         'briva_report' => '/v1/briva/report',
         'briva_report_time' => '/v1/briva/report_time',
+
+        // BRIZZI
+        'brizzi_validate_card_number' => '/v1/brizzi/topup/checknum',
+        'brizzi_topup' => '/v1/brizzi/topup',
+        'brizzi_check_topup_status' => '/v1/brizzi/topup/checktrx',
     ],
 ];

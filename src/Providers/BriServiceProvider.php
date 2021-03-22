@@ -14,9 +14,12 @@ class BriServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__ . '/../../config/bank-bri.php' => config_path('bank-bri.php'),
-        ]);
+        if ($this->app->runningInConsole()) {
+
+            $this->publishes([
+                __DIR__ . '/../../config/bank-bri.php' => config_path('bank-bri.php'),
+            ]);
+        }
     }
 
     /**
@@ -26,7 +29,7 @@ class BriServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom($config = __DIR__ . '/../../config/bank-bri.php', 'bank-bri');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/bank-bri.php', 'bank-bri');
 
         $this->app->singleton('BriAPI', function () {
             return new Bri();
