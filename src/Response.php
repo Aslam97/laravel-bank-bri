@@ -3,9 +3,9 @@
 namespace Aslam\Bri;
 
 use ArrayAccess;
+use Aslam\Bri\Exceptions\RequestException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
-use LogicException;
 
 class Response implements ArrayAccess
 {
@@ -243,7 +243,7 @@ class Response implements ArrayAccess
      * @param  \Closure|null  $callback
      * @return $this
      *
-     * @throws \Aslam\Bri\RequestException
+     * @throws \Aslam\Bri\Exceptions\RequestException
      */
     function throw () {
         $callback = func_get_args()[0] ?? null;
@@ -257,55 +257,6 @@ class Response implements ArrayAccess
         }
 
         return $this;
-    }
-
-    /**
-     * Determine if the given offset exists.
-     *
-     * @param  string  $offset
-     * @return bool
-     */
-    public function offsetExists($offset)
-    {
-        return isset($this->toJson()[$offset]);
-    }
-
-    /**
-     * Get the value for a given offset.
-     *
-     * @param  string  $offset
-     * @return mixed
-     */
-    public function offsetGet($offset)
-    {
-        return $this->toJson()[$offset];
-    }
-
-    /**
-     * Set the value at the given offset.
-     *
-     * @param  string  $offset
-     * @param  mixed  $value
-     * @return void
-     *
-     * @throws \LogicException
-     */
-    public function offsetSet($offset, $value)
-    {
-        throw new LogicException('Response data may not be mutated using array access.');
-    }
-
-    /**
-     * Unset the value at the given offset.
-     *
-     * @param  string  $offset
-     * @return void
-     *
-     * @throws \LogicException
-     */
-    public function offsetUnset($offset)
-    {
-        throw new LogicException('Response data may not be mutated using array access.');
     }
 
     /**
