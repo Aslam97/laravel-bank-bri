@@ -21,7 +21,7 @@ Laravel PHP library to integrate your Application with Bank BRI (Bank Republic I
 Require this package with composer.
 
 ```bash
-composer require aslam/bank-bri
+composer require aslam/laravel-bank-bri
 ```
 
 Publish BRI config

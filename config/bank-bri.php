@@ -11,6 +11,7 @@ return [
     'institution_code' => env('BRI_INSTITUTION_CODE', 'J104408'),
 
     'get_token' => '/oauth/client_credential/accesstoken?grant_type=client_credentials',
+    'get_location' => '/v1/location/near/atm/1',
 
     'account' => [
         'information' => '/v2/inquiry',
