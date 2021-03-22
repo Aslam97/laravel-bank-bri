@@ -2,6 +2,8 @@
 
 namespace Aslam\Bri;
 
+use Aslam\Bri\Exceptions\ConnectionException;
+use Aslam\Bri\Exceptions\RequestException;
 use Aslam\Bri\Traits;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
@@ -12,54 +14,35 @@ class Bri
     use Traits\Information;
     use Traits\BRIVA;
 
-    /**
-     * apiUrlV1
-     *
-     * @var mixed
-     */
-    private $apiUrlV1;
+    private $apiUrl;
 
-    /**
-     * apiUrlV2
-     *
-     * @var mixed
-     */
-    private $apiUrlV2;
+    private $apiUrlExtra;
 
-    /**
-     * clientID
-     *
-     * @var mixed
-     */
     private $clientID;
 
-    /**
-     * clientSecret
-     *
-     * @var mixed
-     */
     private $clientSecret;
 
-    /**
-     * endpoint
-     *
-     * @var mixed
-     */
-    private $endpoint;
+    private $accountNumber;
 
-    /**
-     * Token
-     *
-     * @var mixed
-     */
+    private $institutionCode;
+
     private $token;
 
-    /**
-     * institutionCode
-     *
-     * @var mixed
-     */
-    private $institutionCode;
+    private $getToken;
+
+    private $account;
+
+    private $briva;
+
+    private $brizzi;
+
+    private $fundTransferInternal;
+
+    private $fundTransferExternal;
+
+    private $directDebit;
+
+    private $foreignExchange;
 
     /**
      * Initiate bri API config
@@ -68,14 +51,22 @@ class Bri
      */
     public function __construct($token = null)
     {
-        $this->apiUrlV1 = config('bank-bri.api_url_v1');
-        $this->apiUrlV2 = config('bank-bri.api_url_v2');
+        $this->apiUrl = config('bank-bri.api_url');
+        $this->apiUrlExtra = config('bank-bri.api_url_extra');
         $this->clientID = config('bank-bri.client_id');
         $this->clientSecret = config('bank-bri.client_secret');
-        $this->endpoint = (object) rtrim_endpoint(config('bank-bri.endpoint'));
-
-        $this->token = $token;
+        $this->accountNumber = config('bank-bri.account_number');
         $this->institutionCode = config('bank-bri.institution_code');
+        $this->token = $token;
+
+        $this->getToken = config('bank-bri.get_token');
+        $this->account = (object) rtrim_recursive(config('bank-bri.account'));
+        $this->briva = (object) rtrim_recursive(config('bank-bri.briva'));
+        $this->brizzi = (object) rtrim_recursive(config('bank-bri.brizzi'));
+        $this->fundTransferInternal = (object) rtrim_recursive(config('bank-bri.fund_transfer_internal'));
+        $this->fundTransferExternal = (object) rtrim_recursive(config('bank-bri.fund_transfer_external'));
+        $this->directDebit = (object) rtrim_recursive(config('bank-bri.direct_debit'));
+        $this->foreignExchange = (object) rtrim_recursive(config('bank-bri.foreign_exchange'));
     }
 
     /**
@@ -86,7 +77,7 @@ class Bri
      * @param  string|array $data
      * @return \Aslam\Bri\Response
      *
-     * @throws RequestException
+     * @throws \Aslam\Bri\Exceptions\RequestException
      */
     public function sendRequest(string $httpMethod, string $requestUrl, $data = '')
     {
@@ -142,6 +133,19 @@ class Bri
     public function setToken(string $token)
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * setAccountNumber
+     *
+     * @param  string $accountNumber
+     * @return $this
+     */
+    public function setAccountNumber(string $accountNumber)
+    {
+        $this->accountNumber = $accountNumber;
 
         return $this;
     }

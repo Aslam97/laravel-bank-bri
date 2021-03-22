@@ -13,9 +13,9 @@ trait Information
     {
         $requestUrl = sprintf(
             '%s%s/%s',
-            $this->apiUrlV2,
-            $this->endpoint->account_information,
-            config('bank-bri.account_number')
+            $this->apiUrl,
+            $this->account->information,
+            $this->accountNumber
         );
 
         return $this->sendRequest('GET', $requestUrl);
@@ -32,9 +32,9 @@ trait Information
     {
         $requestUrl = sprintf(
             '%s%s/%s/%s/%s',
-            $this->apiUrlV1,
-            $this->endpoint->account_transaction_history,
-            config('bank-bri.account_number'),
+            $this->apiUrlExtra,
+            $this->account->transaction_history,
+            $this->accountNumber,
             $startDate,
             $endDate
         );

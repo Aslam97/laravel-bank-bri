@@ -11,7 +11,7 @@ trait Token
      */
     public function getToken()
     {
-        $requestUrl = $this->apiUrlV1 . $this->endpoint->get_token;
+        $requestUrl = $this->apiUrlExtra . $this->getToken;
 
         return $this->sendRequest('POST', $requestUrl, [
             'headers' => [

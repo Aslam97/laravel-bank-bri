@@ -1,6 +1,6 @@
 <?php
 
-namespace Aslam\Bri;
+namespace Aslam\Bri\Exceptions;
 
 class ConnectionException extends HttpClientException
 {

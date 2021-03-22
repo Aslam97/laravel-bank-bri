@@ -1,6 +1,8 @@
 <?php
 
-namespace Aslam\Bri;
+namespace Aslam\Bri\Exceptions;
+
+use Aslam\Bri\Response;
 
 class RequestException extends HttpClientException
 {

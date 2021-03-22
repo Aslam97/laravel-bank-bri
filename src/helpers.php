@@ -15,21 +15,21 @@ if (!function_exists('briapi')) {
     }
 }
 
-if (!function_exists('rtrim_endpoint')) {
+if (!function_exists('rtrim_recursive')) {
 
     /**
-     * rtrim_endpoint
+     * rtrim_recursive
      *
-     * @param  mixed $endpoint
+     * @param  mixed $value
      * @return void
      */
-    function rtrim_endpoint($endpoint)
+    function rtrim_recursive($value)
     {
-        if (is_array($endpoint)) {
-            return array_map('rtrim_endpoint', $endpoint);
+        if (is_array($value)) {
+            return array_map('rtrim_recursive', $value);
         }
 
-        return rtrim($endpoint, '/');
+        return rtrim($value, '/');
     }
 }
 

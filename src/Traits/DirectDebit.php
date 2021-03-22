@@ -2,7 +2,7 @@
 
 namespace Aslam\Bri\Traits;
 
-trait BRIZZI
+trait DirectDebit
 {
 
 }

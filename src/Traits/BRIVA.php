@@ -12,7 +12,7 @@ trait BRIVA
      */
     public function createBriva(array $data)
     {
-        $requestUrl = $this->apiUrlV1 . $this->endpoint->briva;
+        $requestUrl = $this->apiUrl . $this->briva->store;
         $data = array_merge($data, ['institutionCode' => $this->institutionCode]);
 
         return $this->sendRequest('POST', $requestUrl, $data);
@@ -27,38 +27,9 @@ trait BRIVA
      */
     public function getBriva(string $brivaNo, string $customerCode)
     {
-        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->briva}/{$this->institutionCode}/{$brivaNo}/{$customerCode}";
+        $requestUrl = "{$this->apiUrl}{$this->briva->show}/{$this->institutionCode}/{$brivaNo}/{$customerCode}";
 
         return $this->sendRequest('GET', $requestUrl);
-    }
-
-    /**
-     * Get payment status of an existing BRIVA account.
-     *
-     * @param string $brivaNo
-     * @param string $customerCode
-     * @return \Aslam\Bri\Response
-     */
-    public function getStatusBriva(int $brivaNo, string $customerCode)
-    {
-        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->briva_status}/{$this->institutionCode}/{$brivaNo}/{$customerCode}";
-
-        return $this->sendRequest('GET', $requestUrl);
-    }
-
-    /**
-     * Manage payment status of an existing BRIVA account
-     *
-     * @param array $data
-     * @param string $statusBayar Y|N
-     * @return \Aslam\Bri\Response
-     */
-    public function updateStatusBriva(array $data)
-    {
-        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->briva_status}";
-        $data = array_merge($data, ['institutionCode' => $this->institutionCode]);
-
-        return $this->sendRequest('PUT', $requestUrl, $data);
     }
 
     /**
@@ -69,7 +40,7 @@ trait BRIVA
      */
     public function updateBriva(array $data)
     {
-        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->briva}";
+        $requestUrl = "{$this->apiUrl}{$this->briva->update}";
         $data = array_merge($data, ['institutionCode' => $this->institutionCode]);
 
         return $this->sendRequest('PUT', $requestUrl, $data);
@@ -84,13 +55,42 @@ trait BRIVA
      */
     public function deleteBriva(string $brivaNo, string $custCode)
     {
-        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->briva}";
+        $requestUrl = "{$this->apiUrl}{$this->briva->destroy}";
         $institutionCode = $this->institutionCode;
 
         $data = compact('institutionCode', 'brivaNo', 'custCode');
         $query = http_build_query($data);
 
         return $this->sendRequest('DELETE', $requestUrl, $query);
+    }
+
+    /**
+     * Get payment status of an existing BRIVA account.
+     *
+     * @param string $brivaNo
+     * @param string $customerCode
+     * @return \Aslam\Bri\Response
+     */
+    public function getStatusBriva(int $brivaNo, string $customerCode)
+    {
+        $requestUrl = "{$this->apiUrl}{$this->briva->status}/{$this->institutionCode}/{$brivaNo}/{$customerCode}";
+
+        return $this->sendRequest('GET', $requestUrl);
+    }
+
+    /**
+     * Manage payment status of an existing BRIVA account
+     *
+     * @param array $data
+     * @param string $statusBayar Y|N
+     * @return \Aslam\Bri\Response
+     */
+    public function updateStatusBriva(array $data)
+    {
+        $requestUrl = "{$this->apiUrl}{$this->briva->status}";
+        $data = array_merge($data, ['institutionCode' => $this->institutionCode]);
+
+        return $this->sendRequest('PUT', $requestUrl, $data);
     }
 
     /**
@@ -103,7 +103,7 @@ trait BRIVA
      */
     public function getReportBriva(string $brivaNo, string $startDate, string $endDate)
     {
-        $requestUrl = "{$this->apiUrlV1}{$this->endpoint->briva_report}/{$this->institutionCode}/{$brivaNo}/{$startDate}/{$endDate}";
+        $requestUrl = "{$this->apiUrl}{$this->briva->report}/{$this->institutionCode}/{$brivaNo}/{$startDate}/{$endDate}";
         return $this->sendRequest('GET', $requestUrl);
     }
 
@@ -126,8 +126,8 @@ trait BRIVA
     ) {
         $requestUrl = sprintf(
             '%s%s/%s/%s/%s/%s/%s/%s',
-            $this->apiUrlV1,
-            $this->endpoint->briva_report_time,
+            $this->apiUrl,
+            $this->briva->report_time,
             $this->institutionCode,
             $brivaNo,
             $startDate,
