@@ -2,7 +2,7 @@
 
 namespace Aslam\Bri\Traits;
 
-trait FundTranferInternal
+trait FundTransferInternal
 {
 
 }
