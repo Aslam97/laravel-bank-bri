@@ -13,6 +13,7 @@ class Bri
     use Traits\Token;
     use Traits\Information;
     use Traits\BRIVA;
+    use Traits\FundTransferInternal;
 
     private $apiUrl;
 
