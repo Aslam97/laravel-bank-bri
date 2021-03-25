@@ -14,6 +14,7 @@ class Bri
     use Traits\Information;
     use Traits\BRIVA;
     use Traits\FundTransferInternal;
+    use Traits\FundTransferExternal;
 
     private $apiUrl;
 

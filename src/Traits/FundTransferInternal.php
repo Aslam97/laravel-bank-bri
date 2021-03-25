@@ -46,12 +46,12 @@ trait FundTransferInternal
     }
 
     /**
-     * FTIcheckStatus
+     * FTICheckStatus
      *
      * @param  string $noReferral
      * @return \Aslam\Bri\Response
      */
-    public function FTIcheckStatus(string $noReferral)
+    public function FTICheckStatus(string $noReferral)
     {
         $requestUrl = "{$this->apiUrl}{$this->fundTransferInternal->check_status}?noReferral={$noReferral}";
 
