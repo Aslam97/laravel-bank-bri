@@ -32,14 +32,29 @@ trait FundTransferInternal
         return $this->sendRequest('GET', $requestUrl);
     }
 
-    public function transfer()
+    /**
+     * FTITransfer
+     *
+     * @param  array $data
+     * @return \Aslam\Bri\Response
+     */
+    public function FTITransfer(array $data)
     {
-        $requestUrl = $this->apiUrl . $this->fund_transfer_internal->transfer;
+        $requestUrl = $this->apiUrl . $this->fundTransferInternal->transfer;
+
+        return $this->sendRequest('POST', $requestUrl, $data);
     }
 
-    public function checkStatus()
+    /**
+     * FTIcheckStatus
+     *
+     * @param  string $noReferral
+     * @return \Aslam\Bri\Response
+     */
+    public function FTIcheckStatus(string $noReferral)
     {
-        $requestUrl = $this->apiUrl . $this->fund_transfer_internal->check_status;
+        $requestUrl = "{$this->apiUrl}{$this->fundTransferInternal->check_status}?noReferral={$noReferral}";
 
+        return $this->sendRequest('GET', $requestUrl);
     }
 }
