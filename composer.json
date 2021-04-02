@@ -40,11 +40,8 @@
   },
   "require": {
     "php": ">=7.2|^8.0",
-    "ext-json": "*",
-    "guzzlehttp/guzzle": "^7.2",
-    "illuminate/collections": "^6.0 || ^7.0 || ^8.0",
-    "illuminate/macroable": "^6.0 || ^7.0 || ^8.0",
-    "illuminate/support": "^6.0 || ^7.0 || ^8.0"
+    "aslam/response": "^1.0",
+    "guzzlehttp/guzzle": "^7.2"
   },
   "config": {
     "sort-packages": true

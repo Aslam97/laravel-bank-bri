@@ -7,7 +7,7 @@ trait Information
     /**
      * Get company account information. including name, balance & status.
      *
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function accountInformation()
     {
@@ -26,7 +26,7 @@ trait Information
      *
      * @param  string $startDate
      * @param  string $endDate
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function accountTransactionHistory(string $startDate, string $endDate)
     {

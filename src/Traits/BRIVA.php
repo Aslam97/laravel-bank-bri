@@ -8,7 +8,7 @@ trait BRIVA
      * Create BRIVA
      *
      * @param array
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function createBriva(array $data)
     {
@@ -23,7 +23,7 @@ trait BRIVA
      *
      * @param string $brivaNo
      * @param string $customerCode
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function getBriva(string $brivaNo, string $customerCode)
     {
@@ -36,7 +36,7 @@ trait BRIVA
      * Update existing BRIVA account.
      *
      * @param array $data
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function updateBriva(array $data)
     {
@@ -51,7 +51,7 @@ trait BRIVA
      *
      * @param string $brivaNo
      * @param string $custCode
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function deleteBriva(string $brivaNo, string $custCode)
     {
@@ -69,7 +69,7 @@ trait BRIVA
      *
      * @param string $brivaNo
      * @param string $customerCode
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function getStatusBriva(int $brivaNo, string $customerCode)
     {
@@ -83,7 +83,7 @@ trait BRIVA
      *
      * @param array $data
      * @param string $statusBayar Y|N
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function updateStatusBriva(array $data)
     {
@@ -99,7 +99,7 @@ trait BRIVA
      * @param  string $brivaNo
      * @param  string $startDate
      * @param  string $endDate
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function getReportBriva(string $brivaNo, string $startDate, string $endDate)
     {
@@ -115,7 +115,7 @@ trait BRIVA
      * @param  string $startTime FORMAT (H:i)
      * @param  string $endDate FORMAT (Y-m-d)
      * @param  string $endTime FORMAT (H:i)
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function getReportTimeBriva(
         string $brivaNo,

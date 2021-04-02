@@ -9,7 +9,7 @@ trait FundTransferExternal
      *
      * @param  string $bankCode
      * @param  string $beneficiaryAccount
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function FTEAccountValidation(string $bankCode, string $beneficiaryAccount)
     {
@@ -28,7 +28,7 @@ trait FundTransferExternal
      * FTETransfer
      *
      * @param  array $data
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function FTETransfer(array $data)
     {
@@ -40,7 +40,7 @@ trait FundTransferExternal
     /**
      * FTEListBankCode
      *
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function FTEListBankCode()
     {

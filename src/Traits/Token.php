@@ -7,7 +7,7 @@ trait Token
     /**
      * Get BRI Token
      *
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function getToken()
     {

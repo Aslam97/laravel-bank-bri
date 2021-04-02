@@ -2,9 +2,10 @@
 
 namespace Aslam\Bri;
 
-use Aslam\Bri\Exceptions\ConnectionException;
-use Aslam\Bri\Exceptions\RequestException;
 use Aslam\Bri\Traits;
+use Aslam\Response\Exceptions\ConnectionException;
+use Aslam\Response\Exceptions\RequestException;
+use Aslam\Response\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 
@@ -77,9 +78,9 @@ class Bri
      * @param  string $httpMethod
      * @param  string $requestUrl
      * @param  string|array $data
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      *
-     * @throws \Aslam\Bri\Exceptions\RequestException
+     * @throws \Aslam\Response\Exceptions\RequestException
      */
     public function sendRequest(string $httpMethod, string $requestUrl, $data = '')
     {

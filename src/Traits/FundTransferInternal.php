@@ -9,7 +9,7 @@ trait FundTransferInternal
      *
      * @param  string $sourceAccount
      * @param  string $beneficiaryAccount
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function FTIAccountValidation(string $sourceAccount, string $beneficiaryAccount)
     {
@@ -36,7 +36,7 @@ trait FundTransferInternal
      * FTITransfer
      *
      * @param  array $data
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function FTITransfer(array $data)
     {
@@ -49,7 +49,7 @@ trait FundTransferInternal
      * FTICheckStatus
      *
      * @param  string $noReferral
-     * @return \Aslam\Bri\Response
+     * @return \Aslam\Response\Response
      */
     public function FTICheckStatus(string $noReferral)
     {
