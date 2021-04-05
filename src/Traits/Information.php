@@ -32,7 +32,7 @@ trait Information
     {
         $requestUrl = sprintf(
             '%s%s/%s/%s/%s',
-            $this->apiUrlExtra,
+            $this->apiUrl,
             $this->account->transaction_history,
             $this->accountNumber,
             $startDate,
