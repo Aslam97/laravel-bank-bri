@@ -1,6 +1,6 @@
 ## :warning: DEPRECATED
 
-`laravel-bank-bri` has been deprecated. There's a lot of changed in BRI API.
+`laravel-bank-bri` has been deprecated. There's a lot of changed made from Official documentation BRI API.
 
 # Laravel Bank BRI
 
