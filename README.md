@@ -1,3 +1,7 @@
+## :warning: DEPRECATED
+
+`laravel-bank-bri` has been deprecated. There's a lot of changed in BRI API.
+
 # Laravel Bank BRI
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
